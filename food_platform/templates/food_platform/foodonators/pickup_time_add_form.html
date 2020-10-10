@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #} -->
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'foodonators:pickup_change_list' %}">My Pickups</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'foodonators:pickup_change' pickup.pk %}">{{ pickup.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add a new pickup time</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">Add a new pickup time</h2>
+  <p class="lead">Add first the text of the pickup time. In the next step you will be able to add the possible answers.</p>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'foodonators:pickup_change' pickup.pk %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+  </form>
+
+
+
+
+
+{% endblock %}

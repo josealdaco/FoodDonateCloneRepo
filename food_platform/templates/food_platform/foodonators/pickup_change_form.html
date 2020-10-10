@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'foodonators:pickup_change_list' %}">My Pickups</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ pickup.name }}</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">
+    {{ pickup.name }}
+    <a href="{% url 'foodonators:pickup_results' pickup.pk %}" class="btn btn-primary float-right">View results</a>
+  </h2>
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Save changes</button>
+        <a href="{% url 'foodonators:pickup_change_list' %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+        <a href="{% url 'foodonators:pickup_delete' pickup.pk %}" class="btn btn-danger float-right">Delete</a>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-10">
+          <strong>Pickup Times</strong>
+        </div>
+        <div class="col-2">
+          <strong>Specifications</strong>
+        </div>
+      </div>
+    </div>
+    <div class="list-group list-group-flush list-group-formset">
+      {% for pickup_time in pickup_times %}
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-10">
+              <a href="{% url 'foodonators:pickup_time_change' pickup.pk pickup_time.pk %}">{{ pickup_time.text }}</a>
+            </div>
+            <div class="col-2">
+              {{ pickup_time.answers_count }}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="list-group-item text-center">
+          <p class="text-muted font-italic mb-0">You haven't added the pickup time yet. Go ahead and <a href="{% url 'foodonators:pickup_time_add' pickup.pk %}">add the pickup time</a>.</p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'foodonators:pickup_time_add' pickup.pk %}" class="btn btn-primary btn-sm">Add pickup_time</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Welcome to Foodonate! <span class="icon-emo-happy"></span></h2>
+  <p class="lead">
+    If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new to Foodonates, get started
+    by creating a <a href="{% url 'foodriver_signup' %}">foodriver account</a>, <a href="{% url 'foodonator_signup' %}">foodonator account</a> or a <a href="{% url 'shelter_signup' %}">shelter account</a>.
+  </p>
+
+{% endblock %}

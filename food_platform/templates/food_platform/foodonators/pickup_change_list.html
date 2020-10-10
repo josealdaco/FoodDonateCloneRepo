@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">My Pickups</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">My Pickups</h2>
+  <a href="{% url 'foodonators:pickup_add' %}" class="btn btn-primary mb-3" role="button">Add pickup</a>
+  <a href="{% url 'foodonators:view-profile-page' %}" class="btn btn-secondary mb-3" role="button">My Profile</a>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Pickup</th>
+          <th>Interested Area</th>
+          <th>PickupTimes</th>
+          <th>Taken</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pickup in pickups %}
+          <tr>
+            <td class="align-middle"><a href="{% url 'foodonators:pickup_change' pickup.pk %}">{{ pickup.name }}</a></td>
+            <td class="align-middle">{{ pickup.interested_area.get_html_badge }}</td>
+            <td class="align-middle">{{ pickup.pickup_times_count }}</td>
+            <td class="align-middle">{{ pickup.taken_count }}</td>
+            <td class="text-right">
+              <a href="{% url 'foodonators:pickup_results' pickup.pk %}" class="btn btn-primary">View results</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">You haven't created any pickup yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

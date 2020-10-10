@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- <h1>Profile</h1>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Age: {{ user.userprofile.age }}</p>
+    <p>Location: {{ user.userprofile.location }}</p>
+    <p>Gender: {{ user.userprofile.gender }}</p>
+    {% for post in user.userpost_set.all reversed %}
+        <p>{{ post.content }}</p>
+        <small class="text-muted">Posted by: {{ post.from_user }} -- {{ post.timestamp }}</small>
+        <hr>
+    {% empty %}
+        <p>No comments yet</p>
+    {% endfor %}
+    <img src="{{ user.userprofile.image.url }}" style="width:100%; height: 450px !important;" > -->
+
+    <div class="col-md-4">
+        <figure class="card card-product-grid card-lg" id="profile-card">
+            <!-- <div class="img-wrap" id="profile-img">
+                <img src="{{ user.userprofile.image.url }}"class="card-img-top" >
+            </div> -->
+            <figcaption class="info">
+                <p class="text-muted">Name: {{ user.name }}</p>
+                <p class="text-muted">Last Name: {{ user.last_name }}</p>
+                <p class="text-muted">Date of birth: {{ user.date_of_birth }}</p>
+                <p class="text-muted">Email: {{ user.email }}</p>
+                {%for area in areas%}
+                <p class="text-muted">Area: {{area.name}}</p>
+
+                {%endfor%}
+
+                {% load static %}
+                <img src = "{{user.profile_Image.url}}" width="100px" height="100px" >
+            </figcaption>
+        </figure>
+
+    </div>
+
+{% endblock %}

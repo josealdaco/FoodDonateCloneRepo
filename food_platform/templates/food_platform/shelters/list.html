@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h3>Shelter Info{% if shelterinfos %}<small class="text-muted">({{ shelterinfos|length }} Shelter Info{{ shelterinfos|length|pluralize:"s" }})</small>{% endif %}</h3>
+  <a href="{% url 'shelters:shelterinfo-create-project' %}" class="btn btn-outline-success my-2 my-sm-0" id="sign">Upload info</a>
+  <hr>
+  {% if shelterinfos %}
+    <div class="card-columns">
+      {% for shelterinfo in shelterinfos %}
+        {% include "partials/card.html" %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-primary" role="alert">No info to display.</div>
+  {% endif %}
+{% endblock %}

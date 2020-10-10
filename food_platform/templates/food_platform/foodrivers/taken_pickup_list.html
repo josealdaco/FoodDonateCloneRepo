@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'food_platform/foodrivers/_header.html' with active='taken' %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Pickup</th>
+          <th>Interested Area</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for taken_pickup in taken_pickups %}
+          <tr>
+            <td>{{ taken_pickup.pickup.name }}</td>
+            <td>{{ taken_pickup.pickup.interested_area.get_html_badge }}</td>
+            <td>{{ taken_pickup.score }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="3">You haven't completed any pickup yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
